@@ -1,3 +1,5 @@
+const CHAIN_ID = ;
+const CHAIN_NAME = "Sepolia";
 function greet() {
     alert("Hello World");
 }
@@ -13,14 +15,23 @@ async function connect() {
          console.log("accounts: ", accounts);
 
          const account = accounts[0];
-         const chainID = await window.ethereum.request({
+         console.log("account: ", account);
+
+         const chainId = await window.ethereum.request({
          method: "eth_chainID",
          params:[]
-        })
+        });
         console.log("chainId: ", chainId);
+        console.log(chainId !== CHAIN_ID);
+        console.log()
+        if (chainId !== CHAIN_ID) {
+            alert(" Connected to wrong chain! Please connect to " + CHAIN_NAME)
+        } else { alert("Connected to account:", + String(account), "and chainId:"+ String(chainId));
+
+        }
 
 
-        alert("Connected to account:", String(account), "and ChainId:",String (chainID));
+        alert("Connected to account:", + String(account), "and chainId:"+ String(chainId));
         }catch {
             alert("Something went wrong connecting. Refresh and try again.");
         }
